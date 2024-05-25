@@ -8,48 +8,49 @@ import veterinaria.cliente.dominio.Producto;
 import veterinaria.cliente.dominio.ProductoRepository;
 
 public class Editor extends javax.swing.JFrame {
+
     public Editor() {
         Conexion cn = new Conexion();
-        initComponents(); 
+        initComponents();
         this.setExtendedState(this.MAXIMIZED_BOTH);
-        
+
         ProductosService service = new ProductosService();
-        ArrayList<Producto> productos = service.cargarProductos();
+        
         ProductoRepository pr = new ProductoRepository();
 
-        //for (Producto p : productos) {
-        //    System.out.println(p.getNombre());
-        //    System.out.println(p.getPrecio());
-        //}
         System.out.println(cn.modo + " n.modo");
-        
-        if (cn.modo == 1){
+
+        if (cn.modo == 1) {
+            ArrayList<Producto> productos = service.cargarAlimentos();
             System.out.println("MODO 1 ALIMENTOS");
             labelModo.setText("ALIMENTOS");
             this.setVisible(true);
-            pr.consulta = "alimentos";
-            
-            
-        }        
-        if (cn.modo == 2){
+            for (Producto p : productos) {
+                System.out.println(p.getNombre());
+                System.out.println(p.getPrecio());
+            }
+
+        }
+        if (cn.modo == 2) {
+            ArrayList<Producto> productos = service.cargarRopa();
             System.out.println("MODO 2 ROPA");
             labelModo.setText("ROPA");
             this.setVisible(true);
             pr.consulta = "ropa";
-        }  
-        if (cn.modo == 3){
+        }
+        if (cn.modo == 3) {
             System.out.println("MODO 3 MEDICAMENTOS");
             labelModo.setText("MEDICAMENTOS");
             this.setVisible(true);
             pr.consulta = "medicamentos";
         }
-        if (cn.modo == 4){
+        if (cn.modo == 4) {
             System.out.println("MODO 4 JUGUETES");
             labelModo.setText("JUGUETES");
             this.setVisible(true);
             pr.consulta = "jueguetes";
         }
-        if (cn.modo == 5){
+        if (cn.modo == 5) {
             System.out.println("MODO 5 ACCESORIOS");
             labelModo.setText("ACCESORIOS");
             this.setVisible(true);
@@ -251,8 +252,7 @@ public class Editor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     public static void main(String args[]) {
-        
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Editor().setVisible(true);

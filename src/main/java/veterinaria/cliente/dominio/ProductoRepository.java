@@ -11,7 +11,7 @@ public class ProductoRepository {
 
     public static String consulta = "ropa";
 
-    public ArrayList<Producto> cargarProductos() {
+    public ArrayList<Producto> cargarAlimentos() {
         ArrayList<Producto> lista = new ArrayList();
         
         try (Connection con = Conexion.conectar(); Statement stmt = con.createStatement();) {
@@ -34,7 +34,40 @@ public class ProductoRepository {
                 prod.setPrecio(rs.getInt("precio"));
 
                 lista.add(prod);
+            }
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
+    
+    
+    
+        public ArrayList<Producto> cargarRopa() {
+        ArrayList<Producto> lista = new ArrayList();
+            System.out.println("asd");
+        try (Connection con = Conexion.conectar(); Statement stmt = con.createStatement();) {
+            System.out.println(consulta + " repositrio");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM ropa");
+            Producto prod;
+            while (rs.next()) {
+                prod = new Producto();
+
+                prod.setID(rs.getInt("cod_producto"));
+
+                prod.setNombre(rs.getString("nombre_producto"));
+
+                prod.setFechaV(rs.getString("fecha_vencimiento"));
+
+                prod.setUnidades(rs.getInt("unidades"));
+
+                prod.setDescripcion(rs.getString("descripcion"));
+
+                prod.setPrecio(rs.getInt("precio"));
+
+                lista.add(prod);
             }
 
         } catch (SQLException e) {

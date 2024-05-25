@@ -14,7 +14,10 @@ public class ProductosService {
     }
     
     
-    public ArrayList<Producto> cargarProductos() {
-        return this.productoRepository.cargarProductos();
+    public ArrayList<Producto> cargarAlimentos() {
+        return this.productoRepository.cargarAlimentos();
+    }
+    public ArrayList<Producto> cargarRopa() {
+        return this.productoRepository.cargarRopa();
     }
 }
