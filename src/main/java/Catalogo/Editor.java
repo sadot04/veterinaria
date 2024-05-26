@@ -5,18 +5,21 @@ import veterinaria.cliente.aplicacion.Catalogo;
 import veterinaria.cliente.aplicacion.ProductosService;
 import veterinaria.cliente.dominio.Conexion;
 import veterinaria.cliente.dominio.Producto;
-import veterinaria.cliente.dominio.ProductoRepository;
+import javax.swing.table.DefaultTableModel;
 
 public class Editor extends javax.swing.JFrame {
-
+    private DefaultTableModel dtm;
+    private Object[] producto = new Object[3];
+    
+    
     public Editor() {
+
         Conexion cn = new Conexion();
         initComponents();
+        dtm = (DefaultTableModel) tablaProductos.getModel();
         this.setExtendedState(this.MAXIMIZED_BOTH);
 
         ProductosService service = new ProductosService();
-        
-        ProductoRepository pr = new ProductoRepository();
 
         System.out.println(cn.modo + " n.modo");
 
@@ -26,35 +29,49 @@ public class Editor extends javax.swing.JFrame {
             labelModo.setText("ALIMENTOS");
             this.setVisible(true);
             for (Producto p : productos) {
-                System.out.println(p.getNombre());
-                System.out.println(p.getPrecio());
+                producto[0] = p.getNombre();
+                dtm.addRow(producto);
             }
-
         }
         if (cn.modo == 2) {
             ArrayList<Producto> productos = service.cargarRopa();
             System.out.println("MODO 2 ROPA");
             labelModo.setText("ROPA");
             this.setVisible(true);
-            pr.consulta = "ropa";
+            for (Producto p : productos) {
+                producto[0] = p.getNombre();
+                dtm.addRow(producto);
+            }
         }
         if (cn.modo == 3) {
             System.out.println("MODO 3 MEDICAMENTOS");
             labelModo.setText("MEDICAMENTOS");
             this.setVisible(true);
-            pr.consulta = "medicamentos";
+            ArrayList<Producto> productos = service.cargarMedicamentos();
+            for (Producto p : productos) {
+                producto[0] = p.getNombre();
+                dtm.addRow(producto);
+            }            
         }
         if (cn.modo == 4) {
             System.out.println("MODO 4 JUGUETES");
             labelModo.setText("JUGUETES");
             this.setVisible(true);
-            pr.consulta = "jueguetes";
+            ArrayList<Producto> productos = service.cargarJuguetes();
+            for (Producto p : productos) {
+                producto[0] = p.getNombre();
+                dtm.addRow(producto);;
+            } 
         }
         if (cn.modo == 5) {
             System.out.println("MODO 5 ACCESORIOS");
             labelModo.setText("ACCESORIOS");
             this.setVisible(true);
-            pr.consulta = "accesorios";
+            ArrayList<Producto> productos = service.cargarAccesorios();
+            for (Producto p : productos) {
+                producto[0] = p.getNombre();
+                dtm.addRow(producto);
+            } 
         }
     }
 
@@ -64,7 +81,7 @@ public class Editor extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaProductos = new javax.swing.JTable();
         labelProducto = new javax.swing.JLabel();
         Producto = new javax.swing.JLabel();
         labelDescripcion = new javax.swing.JLabel();
@@ -84,26 +101,14 @@ public class Editor extends javax.swing.JFrame {
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1920, 1000));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
             },
             new String [] {
-                "Producto", "Precio", "Cantidad"
+                "Producto", "Cantidad"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Double.class, java.lang.Integer.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jTable1);
+        ));
+        jScrollPane1.setViewportView(tablaProductos);
 
         Producto.setText("Producto");
 
@@ -145,7 +150,7 @@ public class Editor extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(761, Short.MAX_VALUE)
+                .addContainerGap(765, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -171,14 +176,14 @@ public class Editor extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(81, 81, 81)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(label_Producto, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
                                             .addComponent(label_Fecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(label_Descripcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(label_Precio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                            .addComponent(label_Precio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(label_Producto, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(jLabel1))
-                        .addGap(369, 369, 369))
+                        .addGap(420, 420, 420))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(labelModo, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(463, 463, 463))))
@@ -190,7 +195,7 @@ public class Editor extends javax.swing.JFrame {
                 .addComponent(labelDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelModo, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(labelProducto)
@@ -210,7 +215,7 @@ public class Editor extends javax.swing.JFrame {
                     .addComponent(label_Precio))
                 .addGap(160, 160, 160)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(118, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -226,30 +231,30 @@ public class Editor extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1621, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(296, Short.MAX_VALUE))
+                .addGap(25, 25, 25)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1625, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(291, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(151, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 855, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         this.setVisible(false);
         Catalogo ct = new Catalogo();
         ct.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {
 
@@ -270,13 +275,13 @@ public class Editor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel labelDescripcion;
-    public javax.swing.JLabel labelModo;
+    private javax.swing.JLabel labelModo;
     private javax.swing.JLabel labelProducto;
     private javax.swing.JLabel label_Descripcion;
     private javax.swing.JLabel label_Fecha;
     private javax.swing.JLabel label_Precio;
     private javax.swing.JLabel label_Producto;
+    private javax.swing.JTable tablaProductos;
     // End of variables declaration//GEN-END:variables
 }
