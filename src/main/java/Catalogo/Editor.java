@@ -1,5 +1,7 @@
 package Catalogo;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import veterinaria.cliente.aplicacion.Catalogo;
 import veterinaria.cliente.aplicacion.ProductosService;
@@ -8,10 +10,10 @@ import veterinaria.cliente.dominio.Producto;
 import javax.swing.table.DefaultTableModel;
 
 public class Editor extends javax.swing.JFrame {
-    private DefaultTableModel dtm;
+
+    private static DefaultTableModel dtm;
     private Object[] producto = new Object[3];
-    
-    
+
     public Editor() {
 
         Conexion cn = new Conexion();
@@ -30,7 +32,9 @@ public class Editor extends javax.swing.JFrame {
             this.setVisible(true);
             for (Producto p : productos) {
                 producto[0] = p.getNombre();
+                producto[1] = p.getID();
                 dtm.addRow(producto);
+
             }
         }
         if (cn.modo == 2) {
@@ -51,7 +55,7 @@ public class Editor extends javax.swing.JFrame {
             for (Producto p : productos) {
                 producto[0] = p.getNombre();
                 dtm.addRow(producto);
-            }            
+            }
         }
         if (cn.modo == 4) {
             System.out.println("MODO 4 JUGUETES");
@@ -61,7 +65,7 @@ public class Editor extends javax.swing.JFrame {
             for (Producto p : productos) {
                 producto[0] = p.getNombre();
                 dtm.addRow(producto);;
-            } 
+            }
         }
         if (cn.modo == 5) {
             System.out.println("MODO 5 ACCESORIOS");
@@ -71,7 +75,7 @@ public class Editor extends javax.swing.JFrame {
             for (Producto p : productos) {
                 producto[0] = p.getNombre();
                 dtm.addRow(producto);
-            } 
+            }
         }
     }
 
@@ -92,7 +96,7 @@ public class Editor extends javax.swing.JFrame {
         label_Fecha = new javax.swing.JLabel();
         label_Descripcion = new javax.swing.JLabel();
         label_Precio = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        botonAñadir = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         labelModo = new javax.swing.JLabel();
@@ -105,7 +109,7 @@ public class Editor extends javax.swing.JFrame {
             new Object [][] {
             },
             new String [] {
-                "Producto", "Cantidad"
+                "Producto", "ID","Cantidad"
             }
         ));
         jScrollPane1.setViewportView(tablaProductos);
@@ -126,11 +130,11 @@ public class Editor extends javax.swing.JFrame {
 
         label_Precio.setText(":");
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        jButton1.setText("+");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botonAñadir.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        botonAñadir.setText("+");
+        botonAñadir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botonAñadirActionPerformed(evt);
             }
         });
 
@@ -156,7 +160,7 @@ public class Editor extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(128, 128, 128)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(botonAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(203, 203, 203))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -202,17 +206,17 @@ public class Editor extends javax.swing.JFrame {
                         .addComponent(Producto, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(label_Producto, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(label_Fecha))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(label_Precio))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(label_Descripcion))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(label_Precio))
+                    .addComponent(jLabel1)
+                    .addComponent(label_Fecha))
                 .addGap(160, 160, 160)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(118, Short.MAX_VALUE))
@@ -220,7 +224,7 @@ public class Editor extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(94, 94, 94)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(botonAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(247, 247, 247))
@@ -252,9 +256,19 @@ public class Editor extends javax.swing.JFrame {
         ct.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void botonAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAñadirActionPerformed
+        ProductosService service = new ProductosService();
+        
+        ArrayList<Producto> productos = service.cargarAlimentos();
+        int row = tablaProductos.getSelectedRow();
+        System.out.println(dtm.getValueAt(row, 1));
+        
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+        for (Producto p : productos) {
+            label_Producto.setText(p.getDescripcion());
+
+        }
+    }//GEN-LAST:event_botonAñadirActionPerformed
 
     public static void main(String args[]) {
 
@@ -267,7 +281,7 @@ public class Editor extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Producto;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton botonAñadir;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
@@ -276,12 +290,12 @@ public class Editor extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelDescripcion;
-    private javax.swing.JLabel labelModo;
+    public javax.swing.JLabel labelModo;
     private javax.swing.JLabel labelProducto;
     private javax.swing.JLabel label_Descripcion;
     private javax.swing.JLabel label_Fecha;
     private javax.swing.JLabel label_Precio;
     private javax.swing.JLabel label_Producto;
-    private javax.swing.JTable tablaProductos;
+    public static javax.swing.JTable tablaProductos;
     // End of variables declaration//GEN-END:variables
 }
