@@ -34,7 +34,6 @@ public class Editor extends javax.swing.JFrame {
                 producto[0] = p.getNombre();
                 producto[1] = p.getID();
                 dtm.addRow(producto);
-
             }
         }
         if (cn.modo == 2) {
@@ -44,7 +43,9 @@ public class Editor extends javax.swing.JFrame {
             this.setVisible(true);
             for (Producto p : productos) {
                 producto[0] = p.getNombre();
+                producto[1] = p.getID();
                 dtm.addRow(producto);
+
             }
         }
         if (cn.modo == 3) {
@@ -54,6 +55,7 @@ public class Editor extends javax.swing.JFrame {
             ArrayList<Producto> productos = service.cargarMedicamentos();
             for (Producto p : productos) {
                 producto[0] = p.getNombre();
+                producto[1] = p.getID();
                 dtm.addRow(producto);
             }
         }
@@ -64,6 +66,7 @@ public class Editor extends javax.swing.JFrame {
             ArrayList<Producto> productos = service.cargarJuguetes();
             for (Producto p : productos) {
                 producto[0] = p.getNombre();
+                producto[1] = p.getID();
                 dtm.addRow(producto);;
             }
         }
@@ -74,6 +77,7 @@ public class Editor extends javax.swing.JFrame {
             ArrayList<Producto> productos = service.cargarAccesorios();
             for (Producto p : productos) {
                 producto[0] = p.getNombre();
+                producto[1] = p.getID();
                 dtm.addRow(producto);
             }
         }
@@ -100,6 +104,7 @@ public class Editor extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         labelModo = new javax.swing.JLabel();
+        botonSeleccionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -149,6 +154,14 @@ public class Editor extends javax.swing.JFrame {
             }
         });
 
+        botonSeleccionar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        botonSeleccionar.setText("Seleccionar");
+        botonSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonSeleccionarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -156,16 +169,6 @@ public class Editor extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(765, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(128, 128, 128)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(botonAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(203, 203, 203))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(48, 48, 48))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -181,16 +184,32 @@ public class Editor extends javax.swing.JFrame {
                                         .addGap(81, 81, 81)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(label_Fecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(label_Descripcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(label_Precio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(label_Producto, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                            .addComponent(label_Descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(jLabel1))
-                        .addGap(420, 420, 420))
+                        .addGap(398, 398, 398))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(labelModo, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(463, 463, 463))))
+                        .addGap(463, 463, 463))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(label_Producto, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(69, 69, 69)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(botonAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(203, 203, 203))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(119, 119, 119)
+                        .addComponent(botonSeleccionar)
+                        .addGap(162, 162, 162))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,7 +223,7 @@ public class Editor extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(labelProducto)
                         .addComponent(Producto, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(label_Producto, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(label_Producto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -217,17 +236,22 @@ public class Editor extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(label_Fecha))
-                .addGap(160, 160, 160)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(118, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(54, 54, 54)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(94, 94, 94)
-                .addComponent(botonAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(247, 247, 247))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(149, 149, 149)
+                        .addComponent(botonAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(247, 247, 247))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(botonSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -257,18 +281,56 @@ public class Editor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void botonAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAñadirActionPerformed
-        ProductosService service = new ProductosService();
-        
-        ArrayList<Producto> productos = service.cargarAlimentos();
-        int row = tablaProductos.getSelectedRow();
-        System.out.println(dtm.getValueAt(row, 1));
-        
 
-        for (Producto p : productos) {
-            label_Producto.setText(p.getDescripcion());
-
-        }
     }//GEN-LAST:event_botonAñadirActionPerformed
+
+    private void botonSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSeleccionarActionPerformed
+        Conexion cn = new Conexion();
+        ProductosService service = new ProductosService();
+
+        int row = tablaProductos.getSelectedRow();
+        int id = (int) dtm.getValueAt(row, 1);
+
+        if (cn.modo == 1) {
+            ArrayList<Producto> alimentos = service.cargarAlimentos();
+            for (Producto p : alimentos) {
+                if (id == p.getID()) {
+                    label_Producto.setText(p.getNombre());
+                    String precio = Double.toString(p.getPrecio());
+                    label_Precio.setText(precio);
+                    label_Descripcion.setText(p.getDescripcion());
+                    label_Fecha.setText(p.getFechaV());
+                }
+            }
+        }
+        if (cn.modo == 2) {
+            ArrayList<Producto> ropa = service.cargarRopa();
+            for (Producto p : ropa) {
+                if (id == p.getID()) {
+                    label_Producto.setText(p.getNombre());
+                    String precio = Double.toString(p.getPrecio());
+                    label_Precio.setText(precio);
+                    label_Descripcion.setText(p.getDescripcion());
+                }
+            }
+        }
+        if (cn.modo == 3) {
+            ArrayList<Producto> medicamentos = service.cargarMedicamentos();
+            for (Producto p : medicamentos) {
+                if (id == p.getID()) {
+                    label_Producto.setText(p.getNombre());
+                    String precio = Double.toString(p.getPrecio());
+                    label_Precio.setText(precio);
+                    label_Descripcion.setText(p.getDescripcion());
+                    label_Fecha.setText(p.getFechaV());
+                }
+            }
+        }
+        if (cn.modo == 4) {
+        }
+        if (cn.modo == 5) {
+        }
+    }//GEN-LAST:event_botonSeleccionarActionPerformed
 
     public static void main(String args[]) {
 
@@ -282,6 +344,7 @@ public class Editor extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Producto;
     private javax.swing.JButton botonAñadir;
+    private javax.swing.JButton botonSeleccionar;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
