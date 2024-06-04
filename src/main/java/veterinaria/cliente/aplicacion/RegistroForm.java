@@ -241,7 +241,7 @@ public class RegistroForm extends javax.swing.JFrame {
 
 
 
-            try (Connection con = Conexion.conectar(); Statement stmt = con.createStatement();) {
+            try (Connection con = Conexion.conectar()) {
                 PreparedStatement pps = con.prepareStatement("INSERT INTO registro (id_usuario, nombre, numero_celular, correo) VALUES (?, ?, ?, ?)");
                 pps.setInt(1, idint);
                 pps.setString(2, nombre);

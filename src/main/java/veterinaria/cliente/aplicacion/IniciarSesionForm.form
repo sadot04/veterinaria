@@ -330,6 +330,7 @@
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
+                <Property name="text" type="java.lang.String" value="Sadot"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="labelNombreActionPerformed"/>
@@ -351,6 +352,9 @@
             <Component class="javax.swing.JSeparator" name="jSeparator2">
             </Component>
             <Component class="javax.swing.JPasswordField" name="contrase&#xf1;a">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="55"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

@@ -12,6 +12,7 @@ public class IniciarSesionForm extends javax.swing.JFrame {
 
     public static String id;
     public static int intid;
+    public static String nombre;
 
     public Object[] persona = new Object[4];
     InputVerifier x;
@@ -20,7 +21,7 @@ public class IniciarSesionForm extends javax.swing.JFrame {
         initComponents();
         dtm = (DefaultTableModel) tablaPersonas.getModel();
         tablaPersonas.setVisible(false);
-
+        
         this.setExtendedState(this.MAXIMIZED_BOTH);
     }
 
@@ -92,6 +93,7 @@ public class IniciarSesionForm extends javax.swing.JFrame {
         jLabel2.setText("Nombre");
 
         labelNombre.setBackground(new java.awt.Color(255, 255, 255));
+        labelNombre.setText("Sadot");
         labelNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 labelNombreActionPerformed(evt);
@@ -101,6 +103,8 @@ public class IniciarSesionForm extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 204));
         jLabel3.setText("ID");
+
+        contraseña.setText("55");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -335,6 +339,7 @@ public class IniciarSesionForm extends javax.swing.JFrame {
 
     private void botonIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIniciarSesionActionPerformed
         id = contraseña.getText();
+        nombre = labelNombre.getText();
         
         intid = Integer.parseInt(id);
         ProductosService service = new ProductosService();

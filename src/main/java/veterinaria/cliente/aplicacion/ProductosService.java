@@ -1,6 +1,7 @@
 package veterinaria.cliente.aplicacion;
 
 import java.util.ArrayList;
+import veterinaria.cliente.dominio.Pago;
 import veterinaria.cliente.dominio.Persona;
 import veterinaria.cliente.dominio.Producto;
 import veterinaria.cliente.dominio.ProductoRepository;
@@ -35,6 +36,10 @@ public class ProductosService {
 
     public ArrayList<Persona> cargarPersonas() {    
         return this.productoRepository.cargarPersonas();
+    }
+    
+    public ArrayList<Pago> cargarPagos() {    
+        return this.productoRepository.cargarPagos();
     }
 
 }

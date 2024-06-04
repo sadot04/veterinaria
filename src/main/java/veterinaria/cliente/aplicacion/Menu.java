@@ -1,5 +1,6 @@
 package veterinaria.cliente.aplicacion;
 
+import Catalogo.Citas;
 import Catalogo.Editor;
 import Catalogo.Historial;
 
@@ -7,9 +8,7 @@ public class Menu extends javax.swing.JFrame {
 
     public Menu() {
         initComponents();
-        this.setExtendedState(this.MAXIMIZED_BOTH);
-        
-        
+        this.setExtendedState(this.MAXIMIZED_BOTH);  
     }
     
     @SuppressWarnings("unchecked")
@@ -57,6 +56,11 @@ public class Menu extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 48)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 204));
         jButton2.setText("CITAS");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(0, 153, 153));
         jButton3.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 36)); // NOI18N
@@ -106,15 +110,14 @@ public class Menu extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(175, 175, 175)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(266, 266, 266)
-                            .addComponent(jLabel4)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(175, 175, 175)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(266, 266, 266)
+                        .addComponent(jLabel4))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(279, 279, 279)
                         .addComponent(jLabel1)))
@@ -224,6 +227,12 @@ public class Menu extends javax.swing.JFrame {
         hs.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Citas ct = new Citas();
+        ct.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     public static void main(String args[]) {
 

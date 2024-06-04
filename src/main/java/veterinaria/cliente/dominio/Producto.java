@@ -1,6 +1,7 @@
 package veterinaria.cliente.dominio;
 
 public class Producto {
+
     int ID;
     String nombre;
     String fechaV;
@@ -55,5 +56,5 @@ public class Producto {
     public void setPrecio(double precio) {
         this.precio = precio;
     }
-    
+
 }

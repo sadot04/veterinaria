@@ -559,9 +559,8 @@ public class Editor extends javax.swing.JFrame {
         IniciarSesionForm is = new IniciarSesionForm();
 
         Calendar calendario = Calendar.getInstance();
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         String fechaEnString = formato.format(calendario.getTime());
-        System.out.println("Fecha y hora actual formateadas: " + fechaEnString);
         for (int row = 0; row < dtm2.getRowCount(); row++) {
 
             String columna1 = dtm2.getValueAt(row, 0).toString();
@@ -588,7 +587,7 @@ public class Editor extends javax.swing.JFrame {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-//        this.setVisible(false);
+
     }//GEN-LAST:event_botonComprarActionPerformed
 
     private void botonRopaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRopaActionPerformed

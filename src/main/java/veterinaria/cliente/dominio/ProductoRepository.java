@@ -7,10 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import veterinaria.cliente.aplicacion.IniciarSesionForm;
 import veterinaria.cliente.aplicacion.RegistroForm;
 
 public class ProductoRepository {
-
+    
     public ArrayList<Producto> cargarAlimentos() {
         ArrayList<Producto> alimentos = new ArrayList();
 
@@ -54,9 +55,7 @@ public class ProductoRepository {
                 prod.setID(rs.getInt("cod_producto"));
 
                 prod.setNombre(rs.getString("nombre_producto"));
-                
-                
-                
+
                 prod.setUnidades(rs.getInt("unidades"));
 
                 prod.setDescripcion(rs.getString("descripcion"));
@@ -85,7 +84,7 @@ public class ProductoRepository {
                 prod.setID(rs.getInt("cod_producto"));
 
                 prod.setNombre(rs.getString("nombre_producto"));
-                
+
                 prod.setFechaV(rs.getString("fecha_vencimiento"));
 
                 prod.setUnidades(rs.getInt("unidades"));
@@ -193,13 +192,13 @@ public class ProductoRepository {
         System.out.println("registrarPersona ejecutado");
         RegistroForm rf = new RegistroForm();
 
-        try (Connection con = Conexion.conectar(); Statement stmt = con.createStatement();) {
+        try (Connection con = Conexion.conectar()) {
             PreparedStatement pps = con.prepareStatement("INSERT INTO registro (id, nombre,celular, correo) VALUES (?, ?, ?, ?)");
             pps.setInt(1, 458);
             pps.setString(2, rf.nombre);
             pps.setInt(3, 457);
             pps.setString(4, rf.correo);
-            
+
             pps.executeUpdate();
 
         } catch (SQLException e) {
@@ -208,4 +207,31 @@ public class ProductoRepository {
 
     }
 
+    public ArrayList<Pago> cargarPagos() {
+        IniciarSesionForm is = new IniciarSesionForm();
+        
+        ArrayList<Pago> pagos = new ArrayList();
+        System.out.println("asd");
+        try (Connection con = Conexion.conectar(); Statement stmt = con.createStatement();) {
+            ResultSet rs = stmt.executeQuery("SELECT * FROM historial\n"
+                    + "WHERE id_historial =" + is.id + ";");
+            Pago pago;
+            while (rs.next()) {
+                pago = new Pago();
+
+                pago.setDescripcion(rs.getString("descripcion"));
+
+                pago.setFecha(rs.getString("fecha_pago"));
+
+                pago.setMonto(rs.getInt("monto"));
+                
+                pagos.add(pago);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return pagos;
+    }
 }
