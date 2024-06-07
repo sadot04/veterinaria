@@ -12,6 +12,7 @@ import java.util.Calendar;
 import veterinaria.cliente.aplicacion.ProductosService;
 import veterinaria.cliente.dominio.Producto;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import veterinaria.cliente.aplicacion.IniciarSesionForm;
 import veterinaria.cliente.aplicacion.Menu;
 import veterinaria.cliente.aplicacion.RegistroForm;
@@ -32,6 +33,11 @@ public class Editor extends javax.swing.JFrame {
         Conexion cn = new Conexion();
         cn.modo = 1;
         initComponents();
+
+        TableColumn column;
+        column = tablaProductos.getColumnModel().getColumn(0);
+        column.setPreferredWidth(500);
+
         dtm = (DefaultTableModel) tablaProductos.getModel();
         dtm2 = (DefaultTableModel) tablaFinal.getModel();
         this.setExtendedState(this.MAXIMIZED_BOTH);
@@ -568,8 +574,6 @@ public class Editor extends javax.swing.JFrame {
 
             fila = columna1 + " " + "(" + columna2 + ")";
             desc = fila + " \n" + desc;
-            
-            
 
         }
         System.out.println(desc);

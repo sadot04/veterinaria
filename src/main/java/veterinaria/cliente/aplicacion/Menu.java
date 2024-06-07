@@ -1,8 +1,11 @@
 package veterinaria.cliente.aplicacion;
 
 import Catalogo.Citas;
+import Catalogo.Desapariciones;
 import Catalogo.Editor;
 import Catalogo.Historial;
+import Catalogo.Mascota;
+import Catalogo.Reporte;
 
 public class Menu extends javax.swing.JFrame {
 
@@ -215,11 +218,15 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        Reporte re = new Reporte();
+        re.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        Mascota ms = new Mascota();
+        ms.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed

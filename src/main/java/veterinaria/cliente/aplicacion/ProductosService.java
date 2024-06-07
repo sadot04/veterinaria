@@ -1,6 +1,8 @@
 package veterinaria.cliente.aplicacion;
 
 import java.util.ArrayList;
+import veterinaria.cliente.dominio.Desaparecido;
+import veterinaria.cliente.dominio.Mascotas;
 import veterinaria.cliente.dominio.Pago;
 import veterinaria.cliente.dominio.Persona;
 import veterinaria.cliente.dominio.Producto;
@@ -34,12 +36,19 @@ public class ProductosService {
         return this.productoRepository.cargarAccesorios();
     }
 
-    public ArrayList<Persona> cargarPersonas() {    
+    public ArrayList<Persona> cargarPersonas() {
         return this.productoRepository.cargarPersonas();
     }
-    
-    public ArrayList<Pago> cargarPagos() {    
+
+    public ArrayList<Pago> cargarPagos() {
         return this.productoRepository.cargarPagos();
     }
 
+    public ArrayList<Mascotas> cargarMascotas() {
+        return this.productoRepository.cargarMascotas();
+    }
+
+    public ArrayList<Desaparecido> cargarDesaparecidos() {
+        return this.productoRepository.cargarDesaparecidos();
+    }
 }

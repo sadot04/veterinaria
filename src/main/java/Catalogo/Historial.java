@@ -2,11 +2,11 @@ package Catalogo;
 
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import veterinaria.cliente.aplicacion.IniciarSesionForm;
 import veterinaria.cliente.aplicacion.Menu;
 import veterinaria.cliente.aplicacion.ProductosService;
 import veterinaria.cliente.dominio.Pago;
-
 
 public class Historial extends javax.swing.JFrame {
 
@@ -17,13 +17,17 @@ public class Historial extends javax.swing.JFrame {
 
         IniciarSesionForm is = new IniciarSesionForm();
         initComponents();
+
+        TableColumn column;
+        column = tablaHistorial.getColumnModel().getColumn(0);
+        column.setPreferredWidth(500);
+
         this.setExtendedState(this.MAXIMIZED_BOTH);
         labelHistorial.setText("Historial de: " + is.nombre);
         dtm = (DefaultTableModel) tablaHistorial.getModel();
         ProductosService service = new ProductosService();
         dtm.setRowCount(0);
         ArrayList<Pago> pagos = service.cargarPagos();
-
 
         for (Pago p : pagos) {
             pagorealizado[0] = p.getDescripcion();
@@ -131,7 +135,7 @@ public class Historial extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.setVisible(false);
         Menu mn = new Menu();
-        mn.setVisible(true);                    
+        mn.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {

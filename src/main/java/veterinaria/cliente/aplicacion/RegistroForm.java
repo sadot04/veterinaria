@@ -9,7 +9,7 @@ import veterinaria.cliente.dominio.ProductoRepository;
 
 public class RegistroForm extends javax.swing.JFrame {
 
-    public String nombre;
+    public static String nombre;
     public String id;
     public String celular;
     public String correo;
@@ -228,6 +228,7 @@ public class RegistroForm extends javax.swing.JFrame {
 
     private void registrarseBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarseBotonActionPerformed
 
+        
         nombre = fieldNombre.getText();
         id = fieldCI.getText();
         celular = fieldCelular.getText();
@@ -238,8 +239,6 @@ public class RegistroForm extends javax.swing.JFrame {
         if (fieldCI.getText().equals("") || fieldCelular.getText().equals("") || fieldCorreo.getText().equals("") || fieldNombre.getText().equals("")) {
             
         } else {
-
-
 
             try (Connection con = Conexion.conectar()) {
                 PreparedStatement pps = con.prepareStatement("INSERT INTO registro (id_usuario, nombre, numero_celular, correo) VALUES (?, ?, ?, ?)");
@@ -253,8 +252,6 @@ public class RegistroForm extends javax.swing.JFrame {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
-
             IniciarSesionForm is = new IniciarSesionForm();
             is.setVisible(true);
             this.setVisible(false);

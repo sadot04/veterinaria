@@ -1,6 +1,7 @@
 package veterinaria.cliente.dominio;
 
 import Catalogo.Conexion;
+import Catalogo.Mascota;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,7 +12,7 @@ import veterinaria.cliente.aplicacion.IniciarSesionForm;
 import veterinaria.cliente.aplicacion.RegistroForm;
 
 public class ProductoRepository {
-    
+
     public ArrayList<Producto> cargarAlimentos() {
         ArrayList<Producto> alimentos = new ArrayList();
 
@@ -209,7 +210,7 @@ public class ProductoRepository {
 
     public ArrayList<Pago> cargarPagos() {
         IniciarSesionForm is = new IniciarSesionForm();
-        
+
         ArrayList<Pago> pagos = new ArrayList();
         System.out.println("asd");
         try (Connection con = Conexion.conectar(); Statement stmt = con.createStatement();) {
@@ -224,7 +225,7 @@ public class ProductoRepository {
                 pago.setFecha(rs.getString("fecha_pago"));
 
                 pago.setMonto(rs.getInt("monto"));
-                
+
                 pagos.add(pago);
             }
 
@@ -233,5 +234,61 @@ public class ProductoRepository {
         }
 
         return pagos;
+    }
+
+    public ArrayList<Mascotas> cargarMascotas() {
+        IniciarSesionForm is = new IniciarSesionForm();
+
+        ArrayList<Mascotas> mascotas = new ArrayList();
+        System.out.println("asd");
+        try (Connection con = Conexion.conectar(); Statement stmt = con.createStatement();) {
+            ResultSet rs = stmt.executeQuery("SELECT * FROM mascota\n"
+                    + "WHERE id_dueno =" + is.id + ";");
+            Mascotas masco;
+            while (rs.next()) {
+                masco = new Mascotas();
+
+                masco.setNombre(rs.getString("nombre"));
+
+                masco.setEdad(rs.getString("edad"));
+
+                masco.setRaza(rs.getString("raza"));
+
+                mascotas.add(masco);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return mascotas;
+    }
+
+    public ArrayList<Desaparecido> cargarDesaparecidos() {
+
+        ArrayList<Desaparecido> desaparecidos = new ArrayList();
+        System.out.println("asd");
+        try (Connection con = Conexion.conectar(); Statement stmt = con.createStatement();) {
+            ResultSet rs = stmt.executeQuery("SELECT * FROM desapariciones");
+            Desaparecido desa;
+            while (rs.next()) {
+                desa = new Desaparecido();
+
+                desa.setNombre(rs.getString("nombre"));
+
+                desa.setZona(rs.getString("zona"));
+
+                desa.setDescripcion(rs.getString("descripcion"));
+
+                desa.setDatos(rs.getString("datos"));
+
+                desaparecidos.add(desa);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return desaparecidos;
     }
 }
